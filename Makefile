@@ -16,11 +16,12 @@ BINS = $(wildcard velero-*)
 
 REPO ?= github.com/konveyor/openshift-velero-plugin
 
-BUILD_IMAGE ?= openshift/origin-release:golang-1.14
+BUILD_IMAGE ?= quay.io/mferrato/origin-release:golang-1.14
 
-IMAGE ?= docker.io/konveyor/openshift-velero-plugin
+IMAGE ?= quay.io/mferrato/openshift-velero-plugin
 
-ARCH ?= amd64
+ARCH ?= $(shell go env GOARCH)
+
 BUILDTAGS ?= "containers_image_ostree_stub exclude_graphdriver_devicemapper exclude_graphdriver_btrfs containers_image_openpgp exclude_graphdriver_overlay"
 
 all: $(addprefix build-, $(BINS))
